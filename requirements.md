@@ -2,7 +2,7 @@
 
 ## What Is This App?
 
-A multi-page website that serves as a tool for composing styles for websites, and even offers a way to share styles and leave reviews on them.
+A multi-page website that serves as a tool for composing styles for websites, and even offers a way to share styles between users.
 
 ---
 
@@ -76,9 +76,13 @@ At the top of the page is scrollable container of pre-made palettes, below it a 
 
 ---
 
+
+
 ## Behaviour That Applies to Every Page
 
 ### Shared navigation header
+
+*placed in file `header.html`*
 
 Every page displays the same header at the top, containing:
 The site title and a one-line description.
@@ -90,6 +94,8 @@ The header is **not duplicated** in each HTML file. It is stored in a single sep
 The navigation link corresponding to the currently viewed page is automatically highlighted. This is set by JavaScript.
 
 ### Shared footer
+
+*placed in file `footer.html`*
 
 Every page has an identical footer at the bottom stating my name as the creator, along with a link to the github repo of this website that has all the source files.
 
