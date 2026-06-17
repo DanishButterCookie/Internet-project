@@ -43,8 +43,8 @@ A slightly more advanced tool, where you can scroll through pre-made palettes of
 
 The landing page. It orients the user and tells them how to use the site.
 
-- Displays a welcome message with a brief description of the site's purpose.
-- Shows the current amount of users online and how many total times the site has been visited. (for fun)
+Displays a welcome message with a brief description of the site's purpose.
+Shows the current amount of users online and how many total times the site has been visited. (for fun)
 
 ---
 
