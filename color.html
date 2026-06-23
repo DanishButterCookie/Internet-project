@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="site-container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        <h1>Color picker</h1>
+        <i>You can visit the about page for help about the usage of the tools.</i>
+        
+        <div id="color-picker-container">
+            <canvas id="colorCanvas" width="256" height="256"></canvas>
+            <input type="range" id="blueSlider" min="0" max="255" value="0">
+            
+            <div id="display-wrapper">
+                <div id="colorBox"></div>
+                <div id="colorText">Select a color...</div>
+                <button id="copyBtn">💾Copy RGB Value</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
