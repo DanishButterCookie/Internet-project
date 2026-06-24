@@ -1,0 +1,7 @@
+obj/
+net9.0/
+Debug/
+bin/
+Properties/
+*.csproj
+appsettings*
