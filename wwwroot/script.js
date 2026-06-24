@@ -109,3 +109,5 @@ copyBtn.addEventListener('click', () => {
 });
 
 render();
+
+console.log("test");
