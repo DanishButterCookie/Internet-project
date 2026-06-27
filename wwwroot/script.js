@@ -100,7 +100,7 @@ copyBtn.addEventListener('click', () => {
 
     navigator.clipboard.writeText(textToCopy).then(() => {
         const originalText = copyBtn.textContent;
-        copyBtn.textContent = '✔️Copied!';
+        copyBtn.textContent = 'Copied!';
         setTimeout(() => {
             copyBtn.textContent = originalText;
         }, 2000);
