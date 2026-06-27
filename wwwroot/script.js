@@ -122,14 +122,13 @@ function getCleanPath() {
 }
 
 function registerVisit() {
-    if (sessionStorage.getItem('hasVisited')) { // already visited
+    if (sessionStorage.getItem('hasVisited')) {
         return; 
     }
 
     fetch('/api/visit', { method: 'POST' })
         .then(response => {
             if (response.ok) {
-                // set the flag in sessionStorage
                 sessionStorage.setItem('hasVisited', 'true');
                 console.log("visit");
             }
@@ -138,17 +137,56 @@ function registerVisit() {
 
 registerVisit();
 
-async function updateVisitDisplay() {
+let myUserId = "";
+
+async function setupUserTracking() {
+    // Check if we already have a User ID for this session
+    let savedId = sessionStorage.getItem('trackingUserId');
+
+    if (savedId) {
+        // We already have an ID, so just use it
+        myUserId = savedId;
+        console.log("Welcome back to this session, keeping ID: " + myUserId);
+    } else {
+        // First time on the site for this tab session, get a fresh ID
+        let response = await fetch('/api/users/join', { method: 'POST' });
+        let data = await response.json();
+        myUserId = data.id;
+
+        // Save it so next page clicks remember it
+        sessionStorage.setItem('trackingUserId', myUserId);
+        console.log("New session started with ID: " + myUserId);
+    }
+
+    // Start the heartbeat loop immediately using our ID
+    setInterval(async () => {
+        await fetch('/api/users/heartbeat?id=' + myUserId, { method: 'POST' });
+    }, 10000);
+
+    // Start the layout updates
+    setInterval(updateStatsDisplay, 5000);
+    updateStatsDisplay();
+}
+
+async function updateStatsDisplay() {
     try {
         const response = await fetch('/api/stats/visits');
         if (response.ok) {
             const data = await response.json();
-            // update the html element
-            document.getElementById('visit-count').textContent = data.totalVisits;
+            
+            const visitElement = document.getElementById('visit-count');
+            if (visitElement) {
+                visitElement.textContent = data.totalVisits;
+            }
+            
+            const onlineElement = document.getElementById('online-count');
+            if (onlineElement) {
+                onlineElement.textContent = data.onlineUsers;
+            }
         }
     } catch (error) {
-        console.error("Could not fetch visit count:", error);
+        console.error("Could not fetch stats:", error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', updateVisitDisplay);
+setupUserTracking();
