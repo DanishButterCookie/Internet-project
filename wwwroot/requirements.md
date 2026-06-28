@@ -32,7 +32,7 @@ The design is meant to be relatively simple, while demonstrating on purpose exam
 Most basic tool for designing websites. It has a cube that can be moved over a fade of Red and Green values in the RGB color space, using its X and Y coordinates as the Red and Green values. the Blue value is controlled using a slider.
 
 ### Text picker
-Another basic tool, used for choosing which text to use for each thing. will have a textbox for inputting sample text, along with being able to choose the size, bold, italic, underline, and type (h1, h2, title, etc...).
+Another basic tool, used for choosing which text to use for each thing. will have a textbox for inputting sample text, along with being able to choose bold, italic, underline, and type (h1, h2, title, etc...).
 
 ### Palette creator
 A slightly more advanced tool, where you can scroll through pre-made palettes of 2 colors that will have a simple name, and choose them for your website. or you can create your own palette and post it for others to see, and see other's palettes. The creation process of a palette is super simple: write down 2 colors to put, and give a title. finally it will request a name under which you will post your palette. (no logins and accounts for now)
@@ -66,7 +66,7 @@ below the canvas the page displays the color's code in hex and rgb, along side a
 
 ### Text picker (`text.html`)
 
-Shows a text at the top of the page, with a slider for text size along with a text next to it for showing the actual value, a dropdown menu for choosing the kind of text (regular, h1, h2, h3 etc..), bold and italic toggle buttons, and a font dropdown menu.
+Shows a text at the top of the page, a dropdown menu for choosing the kind of text (regular, h1, h2, h3 etc..), bold, underline and italic toggle buttons, and a font dropdown menu.
 
 ---
 
