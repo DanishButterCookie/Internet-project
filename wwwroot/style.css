@@ -75,6 +75,73 @@ main {
     padding: 20px;
 }
 
+#preview-container {
+    width: 70vw;
+    max-width: 600px;
+    height: 300px;
+    background: white;
+    border-radius: 25px;
+    border: 3px solid rgb(101, 48, 36);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#text-sandbox {
+    width: 100%;
+    outline: none;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+#text-sandbox:empty:before {
+    content: "Enter your text here...";
+    color: #aaa; /* makes the placeholder look kinda grayed out and more like a placeholder*/
+    pointer-events: none; /* prevents user from ruining the placeholder */
+}
+
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+#controls button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid rgb(101, 48, 36);
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#controls button:hover {
+    color: rgb(231, 206, 181);
+}
+
+#controls button.active {
+    background-color: rgb(101, 48, 36);
+    color: white;
+    border: 2px solid rgb(101, 48, 36);
+}
+
+#tagSelect, #fontSelect {
+    padding: 10px 15px;
+    border: 2px solid rgb(101, 48, 36);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 #copyBtn {
     margin-top: 10px;
     padding: 10px 20px;

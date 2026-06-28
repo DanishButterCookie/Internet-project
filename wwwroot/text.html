@@ -7,12 +7,35 @@
     <div id="header-placeholder"></div>
 
     <main>
-        <h3>about page</h3>
-        <p>This is unique page content.</p>
+        <div id="preview-container">
+            <div id="text-sandbox" contenteditable="true" spellcheck="false"></div>
+        </div>
+
+        <div id="controls">
+            <select id="tagSelect">
+                <option value="p">Regular</option>
+                <option value="h1">H1</option>
+                <option value="h2">H2</option>
+                <option value="h3">H3</option>
+                <option value="h4">H4</option>
+                <option value="h5">H5</option>
+                <option value="h6">H6</option>
+            </select>
+
+            <button id="boldBtn"><b>Bold</b></button>
+            <button id="underlineBtn"><u>U</u></button>
+            <button id="italicBtn"><i>Italic</i></button>
+
+            <select id="fontSelect">
+                <option value="sans-serif">Sans Serif</option>
+                <option value="serif">Serif</option>
+                <option value="monospace">Monospace</option>
+            </select>
+        </div>
     </main>
 
     <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
 </body>
-</html>`
+</html>

@@ -190,3 +190,60 @@ async function updateStatsDisplay() {
 }
 
 setupUserTracking();
+
+const tagSelect = document.getElementById('tagSelect');
+const boldBtn = document.getElementById('boldBtn');
+const italicBtn = document.getElementById('italicBtn');
+const fontSelect = document.getElementById('fontSelect');
+const underlineBtn = document.getElementById('underlineBtn');
+
+
+function getSandbox() {
+    return document.getElementById('text-sandbox');
+}
+
+// tag switching (h1, h2 stuff)
+tagSelect.addEventListener('change', (e) => {
+    const oldBox = getSandbox();
+    const newTag = document.createElement(e.target.value);
+    
+    newTag.id = "text-sandbox";
+    newTag.contentEditable = "true";
+    newTag.spellcheck = false;
+    newTag.innerHTML = oldBox.innerHTML;
+    
+    // copy the stuff that is not controlled by the tag
+    newTag.style.fontWeight = oldBox.style.fontWeight;
+    newTag.style.fontStyle = oldBox.style.fontStyle;
+    newTag.style.fontFamily = oldBox.style.fontFamily;
+    
+    oldBox.replaceWith(newTag);
+});
+
+// toggle buttons
+boldBtn.addEventListener('click', () => {
+    boldBtn.classList.toggle('active');
+
+    const box = getSandbox();
+    box.style.fontWeight = box.style.fontWeight === 'bold' ? 'normal' : 'bold';
+});
+
+italicBtn.addEventListener('click', () => {
+    italicBtn.classList.toggle('active');
+    
+    const box = getSandbox();
+    box.style.fontStyle = box.style.fontStyle === 'italic' ? 'normal' : 'italic';
+});
+
+underlineBtn.addEventListener('click', () => {
+    underlineBtn.classList.toggle('active');
+    
+    const box = getSandbox();
+    const isUnderlined = box.style.textDecoration === 'underline';
+    box.style.textDecoration = isUnderlined ? 'none' : 'underline';
+});
+
+// font Family
+fontSelect.addEventListener('change', (e) => {
+    getSandbox().style.fontFamily = e.target.value;
+});
