@@ -75,6 +75,108 @@ main {
     padding: 20px;
 }
 
+#palette-creator {
+    width: 70%;
+    margin: 40px auto;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#paletteForm {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+#paletteForm input[type="text"] {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.color-inputs-group {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+}
+
+#paletteForm input[type="color"] {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#paletteForm button {
+    flex: 1;
+    padding: 10px 15px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+#paletteForm button:hover {
+    background: #000;
+}
+
+#premade-container, #community-palettes {
+    width: 70%;
+    margin: 0 auto 40px auto;
+}
+
+.scroll-row, .palette-grid {
+    column-width: 240px; /* how thin columns get before breaking */
+    column-gap: 20px;
+    width: 100%;
+}
+
+.user-card {
+    display: inline-block; /* prevents card splitting across columns */
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.p-preview-split {
+    display: flex;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.color-block {
+    flex: 1;
+    height: 100%;
+}
+
+.color-values {
+    display: flex;
+    justify-content: space-between;
+    font-family: monospace;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.val-group {
+    display: flex;
+    flex-direction: column;
+}
+
 #preview-container {
     width: 70vw;
     max-width: 600px;

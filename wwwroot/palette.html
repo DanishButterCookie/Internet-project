@@ -7,8 +7,52 @@
     <div id="header-placeholder"></div>
 
     <main>
-        <h1>Palettes</h1>
-        <p>This is unique page content.</p>
+        <section id="premade-container">
+            <h2>Official Palettes</h2>
+            <div id="premade-container-inner" class="scroll-row"></div>
+        </section>
+
+        <section id="community-palettes">
+            <h2>User-made Palettes</h2>
+            <div id="palette-grid" class="palette-grid"></div>
+        </section>
+
+        <section id="palette-creator">
+            <h2>Post Your Palette</h2>
+            <form id="paletteForm">
+                <input type="text" id="pName" placeholder="Palette Title" required>
+                <div class="color-inputs-group">
+                    <input type="color" id="color1" value="#653024">
+                    <input type="color" id="color2" value="#e7ceb5">
+                </div>
+                <input type="text" id="userName" placeholder="Your Name" required>
+                <button type="submit">Post Palette</button>
+            </form>
+        </section>
+
+       <template id="palette-template">
+            <div class="user-card">
+                <h3 class="p-title"></h3>
+                
+                <div class="p-preview-split">
+                    <div class="color-block block-1"></div>
+                    <div class="color-block block-2"></div>
+                </div>
+
+                <div class="color-values">
+                    <div class="val-group">
+                        <span class="hex-1"></span>
+                        <span class="rgb-1"></span>
+                    </div>
+                    <div class="val-group">
+                        <span class="hex-2"></span>
+                        <span class="rgb-2"></span>
+                    </div>
+                </div>
+                
+                <p class="p-meta"></p>
+            </div>
+        </template>
     </main>
 
     <div id="footer-placeholder"></div>

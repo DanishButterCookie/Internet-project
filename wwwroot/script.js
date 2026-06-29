@@ -185,7 +185,21 @@ async function updateStatsDisplay() {
             }
         }
     } catch (error) {
-        console.error("Could not fetch stats:", error);
+        console.error("Could not fetch visits stats:", error);
+    }
+
+    try {
+        const paletteResponse = await fetch('/api/palettes');
+        if (paletteResponse.ok) {
+            const palettesData = await paletteResponse.json();
+            
+            const paletteElement = document.getElementById('palette-count');
+            if (paletteElement) {
+                paletteElement.textContent = palettesData.length;
+            }
+        }
+    } catch (error) {
+        console.error("Could not fetch palette stats:", error);
     }
 }
 
@@ -202,48 +216,147 @@ function getSandbox() {
     return document.getElementById('text-sandbox');
 }
 
-// tag switching (h1, h2 stuff)
-tagSelect.addEventListener('change', (e) => {
-    const oldBox = getSandbox();
-    const newTag = document.createElement(e.target.value);
-    
-    newTag.id = "text-sandbox";
-    newTag.contentEditable = "true";
-    newTag.spellcheck = false;
-    newTag.innerHTML = oldBox.innerHTML;
-    
-    // copy the stuff that is not controlled by the tag
-    newTag.style.fontWeight = oldBox.style.fontWeight;
-    newTag.style.fontStyle = oldBox.style.fontStyle;
-    newTag.style.fontFamily = oldBox.style.fontFamily;
-    
-    oldBox.replaceWith(newTag);
-});
+if (tagSelect) {
 
-// toggle buttons
-boldBtn.addEventListener('click', () => {
-    boldBtn.classList.toggle('active');
+    // tag switching (h1, h2 stuff)
+    tagSelect.addEventListener('change', (e) => {
+        const oldBox = getSandbox();
+        const newTag = document.createElement(e.target.value);
+        
+        newTag.id = "text-sandbox";
+        newTag.contentEditable = "true";
+        newTag.spellcheck = false;
+        newTag.innerHTML = oldBox.innerHTML;
+        
+        // copy the stuff that is not controlled by the tag
+        newTag.style.fontWeight = oldBox.style.fontWeight;
+        newTag.style.fontStyle = oldBox.style.fontStyle;
+        newTag.style.fontFamily = oldBox.style.fontFamily;
+        
+        oldBox.replaceWith(newTag);
+    });
 
-    const box = getSandbox();
-    box.style.fontWeight = box.style.fontWeight === 'bold' ? 'normal' : 'bold';
-});
+    // toggle buttons
+    boldBtn.addEventListener('click', () => {
+        boldBtn.classList.toggle('active');
 
-italicBtn.addEventListener('click', () => {
-    italicBtn.classList.toggle('active');
+        const box = getSandbox();
+        box.style.fontWeight = box.style.fontWeight === 'bold' ? 'normal' : 'bold';
+    });
+
+    italicBtn.addEventListener('click', () => {
+        italicBtn.classList.toggle('active');
+        
+        const box = getSandbox();
+        box.style.fontStyle = box.style.fontStyle === 'italic' ? 'normal' : 'italic';
+    });
+
+    underlineBtn.addEventListener('click', () => {
+        underlineBtn.classList.toggle('active');
+        
+        const box = getSandbox();
+        const isUnderlined = box.style.textDecoration === 'underline';
+        box.style.textDecoration = isUnderlined ? 'none' : 'underline';
+    });
+
+    // font Family
+    fontSelect.addEventListener('change', (e) => {
+        getSandbox().style.fontFamily = e.target.value;
+    });
+}
+
+const template = document.getElementById('palette-template');
+const form = document.getElementById('paletteForm');
+const curatedContainer = document.getElementById('premade-container-inner');
+const communityGrid = document.getElementById('palette-grid');
+
+// helper to turn hex to rgb
+function hexToRgbStr(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+        hex = hex.split('').map(s => s + s).join('');
+    }
+    const num = parseInt(hex, 16);
+    const r = (num >> 16) & 255;
+    const g = (num >> 8) & 255;
+    const b = num & 255;
+    return `(${r}, ${g}, ${b})`;
+}
+
+function createPaletteCard(p) {
+    const clone = template.content.cloneNode(true);
     
-    const box = getSandbox();
-    box.style.fontStyle = box.style.fontStyle === 'italic' ? 'normal' : 'italic';
-});
+    clone.querySelector('.p-title').textContent = p.title;
+    clone.querySelector('.p-meta').textContent = p.author ? `By ${p.author} on ${p.date}` : "Official Palette";
 
-underlineBtn.addEventListener('click', () => {
-    underlineBtn.classList.toggle('active');
-    
-    const box = getSandbox();
-    const isUnderlined = box.style.textDecoration === 'underline';
-    box.style.textDecoration = isUnderlined ? 'none' : 'underline';
-});
+    clone.querySelector('.block-1').style.backgroundColor = p.c1;
+    clone.querySelector('.block-2').style.backgroundColor = p.c2;
 
-// font Family
-fontSelect.addEventListener('change', (e) => {
-    getSandbox().style.fontFamily = e.target.value;
-});
+    const rgb1 = hexToRgbStr(p.c1);
+    const rgb2 = hexToRgbStr(p.c2);
+
+    clone.querySelector('.hex-1').textContent = p.c1.toUpperCase();
+    clone.querySelector('.rgb-1').textContent = rgb1;
+    clone.querySelector('.hex-2').textContent = p.c2.toUpperCase();
+    clone.querySelector('.rgb-2').textContent = rgb2;
+
+    return clone;
+}
+
+async function loadAllPalettes() {
+    try {
+        const [curatedRes, communityRes] = await Promise.all([
+            fetch('/api/palettes/curated'),
+            fetch('/api/palettes')
+        ]);
+
+        const curated = await curatedRes.json();
+        const community = await communityRes.json();
+
+        if (curatedContainer && template) {
+            curatedContainer.innerHTML = '';
+            curated.forEach(p => {
+                const card = createPaletteCard(p);
+                curatedContainer.appendChild(card);
+            });
+        }
+
+        if (communityGrid && template) {
+            communityGrid.innerHTML = '';
+            community.forEach(p => {
+                const card = createPaletteCard(p);
+                communityGrid.appendChild(card);
+            });
+        }
+    } catch (err) {
+        console.error("Error loading palettes:", err);
+    }
+}
+
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const newPalette = {
+            title: document.getElementById('pName').value,
+            c1: document.getElementById('color1').value,
+            c2: document.getElementById('color2').value,
+            author: document.getElementById('userName').value
+        };
+
+        const response = await fetch('/api/palettes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newPalette)
+        });
+
+        if (response.ok) {
+            form.reset();
+            loadAllPalettes();
+        }
+    });
+}
+
+if (curatedContainer && communityGrid) {
+    loadAllPalettes();
+}
