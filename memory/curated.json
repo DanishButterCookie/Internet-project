@@ -1,0 +1,24 @@
+{
+    "Palettes": [
+        { "title": "Official website", "c1": "#653024", "c2": "#e7ceb5" },
+        { "title": "Cyberpunk Neon", "c1": "#00f5d4", "c2": "#7b2cbf" },
+        { "title": "Desert Sage", "c1": "#e07a5f", "c2": "#81b29a" },
+        { "title": "Nordic Frost", "c1": "#2b2d42", "c2": "#8d99ae" },
+        { "title": "Tokyo Midnight", "c1": "#1a1a2e", "c2": "#e94560" },
+        { "title": "Vintage Polaroid", "c1": "#f4a261", "c2": "#e76f51" },
+        { "title": "Forest Moss", "c1": "#132a13", "c2": "#bc4749" },
+        { "title": "Terracotta Clay", "c1": "#b56576", "c2": "#e56b6f" },
+        { "title": "Deep Sapphire", "c1": "#03045e", "c2": "#00b4d8" },
+        { "title": "Matcha Latte", "c1": "#606c38", "c2": "#fefae0" },
+        { "title": "Industrial Rust", "c1": "#3d348b", "c2": "#f7b801" },
+        { "title": "Crimson Velvet", "c1": "#780000", "c2": "#fdc500" },
+        { "title": "Electric Lavender", "c1": "#c77dff", "c2": "#38b000" },
+        { "title": "Balsamic & Olive", "c1": "#283618", "c2": "#dda15e" },
+        { "title": "Miami Vice", "c1": "#ff70a6", "c2": "#70d6ff" },
+        { "title": "Autumn Ember", "c1": "#d62828", "c2": "#f77f00" },
+        { "title": "Glacier Ice", "c1": "#03045e", "c2": "#caf0f8" },
+        { "title": "Earthy Ochre", "c1": "#582f0e", "c2": "#a3b18a" },
+        { "title": "Space Nebula", "c1": "#10002b", "c2": "#c77dff" },
+        { "title": "Cafe Au Lait", "c1": "#7f5539", "c2": "#e6ccb2" }
+    ]
+}
